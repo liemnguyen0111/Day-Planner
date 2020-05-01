@@ -49,7 +49,7 @@ document.addEventListener('click', (event) =>
     if( tempLength > 0 && tempIndex === -1)
     {
         console.log("is pushed")
-    //    userData.push(tempData)
+         userData.push(tempData)
     //    console.log(userData.findIndex(x => x.time === `${tempData.time}`))
     //    console.log(userData)
        setData()
@@ -75,7 +75,12 @@ let setData = () =>
 /** Check and get high score from client-side storage */
 const getData = () =>
 {
-        return JSON.parse(localStorage.getItem('data'))
+    if(JSON.parse(localStorage.getItem('data')) != null)
+       { return JSON.parse(localStorage.getItem('data'))}
+       else
+       {
+           return []
+       }
 }
 
 userData = getData()
@@ -83,7 +88,7 @@ userData = getData()
 for(let i = 0;i<24;i++)
 {
     let tempIndex = userData.findIndex(x => x.time === hourList[i].textContent)
-    // console.log(tempIndex)
+
    if(tempIndex !== -1)
     descList[i].value = userData[tempIndex].task
 }
