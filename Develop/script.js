@@ -17,7 +17,7 @@ newElem.innerHTML = `
 <div class = "row">
 
     <div class= "hour" data-hourIndex="${i}"> <p>${i}:00 ${ampm}</p> </div>
-    <input type="text" class="description" id="description" data-descIndex="${i}" placeholder="Task">      
+    <input type="textarea" class="description" id="description" data-descIndex="${i}" placeholder="Task">      
     <button class="saveBtn" type="button" id="saveBtn" data-btnIndex="${i}"=>Save</button>
 
 </div>`
@@ -93,10 +93,10 @@ document.getElementById("currentDay").textContent = `${Date().slice(0,33)}`
 setInterval(function(){ 
                
             document.getElementById("currentDay").textContent = `${Date().slice(0,33)}`
-           
+            check()
          }, 1000)
 
-// Check
+// Check and change color
 let check = () =>
 {
     let moment = Date().slice(16,18)
@@ -111,4 +111,3 @@ let check = () =>
        descList[i].setAttribute("class","future")
     }
 }
-check()
