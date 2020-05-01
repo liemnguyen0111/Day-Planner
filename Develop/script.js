@@ -15,11 +15,11 @@ for(let i = 0 ; i < 24; i++)
 let newElem = document.createElement('div')
 newElem.innerHTML = `  
 <div class = "row">
-<div class="input-group mb-3">
+
     <div class= "hour" data-hourIndex="${i}"> <p>${i}:00 ${ampm}</p> </div>
     <input type="text" class="description" id="description" data-descIndex="${i}" placeholder="Task">      
     <button class="saveBtn" type="button" id="saveBtn" data-btnIndex="${i}"=>Save</button>
-</div>
+
 </div>`
 
 document.getElementById('container').append(newElem)
@@ -83,8 +83,32 @@ userData = getData()
 for(let i = 0;i<24;i++)
 {
     let tempIndex = userData.findIndex(x => x.time === hourList[i].textContent)
-    console.log(tempIndex)
+    // console.log(tempIndex)
    if(tempIndex !== -1)
     descList[i].value = userData[tempIndex].task
 }
 
+// Date
+document.getElementById("currentDay").textContent = `${Date().slice(0,33)}`
+setInterval(function(){ 
+               
+            document.getElementById("currentDay").textContent = `${Date().slice(0,33)}`
+           
+         }, 1000)
+
+// Check
+let check = () =>
+{
+    let moment = Date().slice(16,18)
+    // console.log(moment)
+    for(let i = 0 ; i < 24; i++)
+    {
+        if(parseInt(moment) > parseInt(hourList[i].textContent.slice(0,3).replace(/:/g, "")))
+       descList[i].setAttribute("class","past")
+       if(parseInt(moment) === parseInt(hourList[i].textContent.slice(0,3).replace(/:/g, "")))
+       descList[i].setAttribute("class","present")
+       if(parseInt(moment) < parseInt(hourList[i].textContent.slice(0,3).replace(/:/g, "")))
+       descList[i].setAttribute("class","future")
+    }
+}
+check()
