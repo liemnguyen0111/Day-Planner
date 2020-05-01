@@ -35,7 +35,7 @@ let hourList = timeList.querySelectorAll('.hour')
 
 document.addEventListener('click', (event) =>
 {
-    if(event.target.id === "saveBtn")
+    if(event.target.id === "saveBtn" && descList[event.target.dataset.btnindex].value.length > 0)
     {
     let tempData = new Object()
     tempData.time = hourList[event.target.dataset.btnindex].textContent
@@ -43,21 +43,21 @@ document.addEventListener('click', (event) =>
 
     let tempIndex = userData.findIndex(x => x.time === `${tempData.time}`)
     let tempLength = descList[event.target.dataset.btnindex].value.length 
-    console.log(tempIndex)
+    // console.log(tempIndex)
 
         
     if( tempLength > 0 && tempIndex === -1)
     {
         console.log("is pushed")
-       userData.push(tempData)
-       console.log(userData.findIndex(x => x.time === `${tempData.time}`))
-       console.log(userData)
+    //    userData.push(tempData)
+    //    console.log(userData.findIndex(x => x.time === `${tempData.time}`))
+    //    console.log(userData)
        setData()
     }
     else
     {
     userData[tempIndex].task = descList[event.target.dataset.btnindex].value
-    console.log(userData)
+    // console.log(userData)
     setData()
     }
 }
@@ -103,11 +103,13 @@ let check = () =>
     // console.log(moment)
     for(let i = 0 ; i < 24; i++)
     {
-        if(parseInt(moment) > parseInt(hourList[i].textContent.slice(0,3).replace(/:/g, "")))
-       descList[i].setAttribute("class","past")
+       if(parseInt(moment) > parseInt(hourList[i].textContent.slice(0,3).replace(/:/g, "")))
+       {descList[i].setAttribute("class","past")}
+
        if(parseInt(moment) === parseInt(hourList[i].textContent.slice(0,3).replace(/:/g, "")))
-       descList[i].setAttribute("class","present")
+       { descList[i].setAttribute("class","present")}
+
        if(parseInt(moment) < parseInt(hourList[i].textContent.slice(0,3).replace(/:/g, "")))
-       descList[i].setAttribute("class","future")
+       {descList[i].setAttribute("class","future")}
     }
 }
