@@ -43,6 +43,7 @@ document.addEventListener('click', (event) =>
 
     let tempIndex = userData.findIndex(x => x.time === `${tempData.time}`)
     let tempLength = descList[event.target.dataset.btnindex].value.length 
+    console.log(tempIndex)
 
         
     if( tempLength > 0 && tempIndex === -1)
@@ -63,7 +64,7 @@ document.addEventListener('click', (event) =>
 
 })
 
-
+/** Query data from  */
 
 /** Store task and time into client-side storage */
 let setData = () =>
@@ -76,18 +77,14 @@ const getData = () =>
 {
         return JSON.parse(localStorage.getItem('data'))
 }
+
 userData = getData()
 
-// for(let i = 0;i<userData.length;i++)
-// {
-//     console.log(userData)
-   
-//     if(hourList[i].textContent === userData[i].time)
-//     {
-//         console.log("match")
-//         console.log
-//     }
-//     else{
-//         console.log("not match")
-//     }
-// }
+for(let i = 0;i<24;i++)
+{
+    let tempIndex = userData.findIndex(x => x.time === hourList[i].textContent)
+    console.log(tempIndex)
+   if(tempIndex !== -1)
+    descList[i].value = userData[tempIndex].task
+}
+
